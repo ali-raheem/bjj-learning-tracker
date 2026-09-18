@@ -196,8 +196,17 @@
 <style>
   .presets {
     margin-top: 8px;
+    gap: 6px;
   }
   .chip.stat {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 44px;
+    flex-direction: column;
+    gap: 0;
+    padding: 4px 6px;
+    line-height: 1.15;
+    font-size: 0.9rem;
     background: linear-gradient(90deg, var(--fill-color) var(--fill), transparent var(--fill));
     --fill-color: var(--accent-soft);
   }
@@ -206,7 +215,7 @@
     background-color: transparent;
   }
   .pct {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     opacity: 0.8;
   }
 </style>

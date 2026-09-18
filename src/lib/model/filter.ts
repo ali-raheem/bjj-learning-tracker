@@ -184,7 +184,7 @@ export const PRESETS: Preset[] = [
     label: 'Spar',
     filters: { read: 'yes', drilled: 'yes', spar: 'lt3', sort: 'sparAsc' },
   },
-  { id: 'established', label: 'Working', filters: { spar: '3', sort: 'default' } },
+  { id: 'established', label: 'Works', filters: { spar: '3', sort: 'default' } },
 ];
 
 /** Filters with the preset applied. Search and the archived setting are left as they are. */
