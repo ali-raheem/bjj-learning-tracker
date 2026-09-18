@@ -3,6 +3,7 @@
   import { BOOK_FILE_ACCEPT, parseAnyBookFile } from '../lib/import/anyBook';
   import { importBook, type BookImportSummary } from '../lib/import/bookImport';
   import { ImportError } from '../lib/import/validation';
+  import { progressStats } from '../lib/model/filter';
   import { data } from '../lib/ui/data.svelte';
   import { confirmAction, errorMessage, pickFile } from '../lib/ui/files';
   import { href } from '../lib/ui/router.svelte';
@@ -16,10 +17,20 @@
 
   const books = $derived(data.books.slice().sort((a, b) => a.ordering - b.ordering));
 
+  function summaryLine(c: { total: number; done: number; pct: number }) {
+    const parts = [`${c.total} technique${c.total === 1 ? '' : 's'}`, `${c.done} working`];
+    if (c.total > 0) parts.push(`${c.pct}% complete`);
+    return parts.join(' · ');
+  }
+
   function counts(bookId: string) {
     const ts = data.techniques.filter((t) => t.bookId === bookId && !t.archived);
-    const done = ts.filter((t) => t.sparringSuccesses >= 3).length;
-    return { total: ts.length, done };
+    const s = progressStats(ts);
+    return {
+      total: ts.length,
+      done: ts.filter((t) => t.sparringSuccesses >= 3).length,
+      pct: s.overall,
+    };
   }
 
   async function addBook() {
@@ -129,7 +140,7 @@
             >{/if}
         </div>
         {#if b.description}<div class="muted small truncate">{b.description}</div>{/if}
-        <div class="muted small">{c.total} techniques · {c.done} established</div>
+        <div class="muted small">{summaryLine(c)}</div>
       </a>
       <div class="stack" style="gap:2px">
         <button

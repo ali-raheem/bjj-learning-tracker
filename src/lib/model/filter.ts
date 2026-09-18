@@ -1,4 +1,4 @@
-import type { Book, Chapter, Technique } from './types';
+import { MAX_SPARRING, type Book, type Chapter, type Technique } from './types';
 
 export type TriFilter = 'any' | 'yes' | 'no';
 export type SparFilter = 'any' | '0' | '1' | '2' | '3' | 'lt3';
@@ -202,3 +202,55 @@ export function presetActive(current: Filters, preset: Preset): boolean {
   const target = applyPreset(current, preset);
   return PRESET_KEYS.every((k) => current[k] === target[k]);
 }
+
+// --------------------------------------------------------------- progress
+
+/** Completion over a population of techniques (normally non-archived, active Books only). */
+export interface ProgressStats {
+  total: number;
+  /** Percent of techniques marked read. */
+  read: number;
+  /** Percent marked drilled. */
+  drilled: number;
+  /** Percent of possible sparring successes achieved: partial credit, 2 of 3 counts as 67%. */
+  spar: number;
+  /** Percent with all three sparring successes. */
+  working: number;
+  /** Overall: read, drilled and each sparring success count one point, five per technique. */
+  overall: number;
+}
+
+const pct = (num: number, den: number) => (den === 0 ? 0 : Math.round((100 * num) / den));
+
+export function progressStats(
+  techniques: Pick<Technique, 'read' | 'drilled' | 'sparringSuccesses'>[],
+): ProgressStats {
+  const total = techniques.length;
+  let read = 0;
+  let drilled = 0;
+  let sparPoints = 0;
+  let working = 0;
+  for (const t of techniques) {
+    if (t.read) read++;
+    if (t.drilled) drilled++;
+    const s = Math.max(0, Math.min(MAX_SPARRING, t.sparringSuccesses));
+    sparPoints += s;
+    if (s >= MAX_SPARRING) working++;
+  }
+  return {
+    total,
+    read: pct(read, total),
+    drilled: pct(drilled, total),
+    spar: pct(sparPoints, total * MAX_SPARRING),
+    working: pct(working, total),
+    overall: pct(read + drilled + sparPoints, total * (2 + MAX_SPARRING)),
+  };
+}
+
+/** Which stat fills each preset chip. */
+export const PRESET_STAT: Record<string, keyof Omit<ProgressStats, 'total' | 'overall'>> = {
+  read: 'read',
+  drill: 'drilled',
+  rolling: 'spar',
+  established: 'working',
+};

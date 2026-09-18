@@ -4,7 +4,9 @@
     groupByChapter,
     isDefaultFilters,
     joinRows,
+    PRESET_STAT,
     PRESETS,
+    progressStats,
     sortRows,
   } from '../lib/model/filter';
   import { loadExampleBook } from '../lib/import/example';
@@ -30,6 +32,10 @@
   const groups = $derived(groupByChapter(filtered));
   const filtersActive = $derived(!isDefaultFilters({ ...prefs.filters, search: '' }));
   const showBookName = $derived(activeIds.size > 1);
+  /** Completion over non-archived techniques in the active Books, ignoring search and filters. */
+  const stats = $derived(
+    progressStats(data.techniques.filter((t) => !t.archived && activeIds.has(t.bookId))),
+  );
 
   function establishedCount(chapterId: string) {
     const ts = data.techniquesOf(chapterId).filter((t) => !t.archived);
@@ -114,14 +120,18 @@
   {/if}
   <div class="row presets" role="group" aria-label="Quick filters">
     {#each PRESETS as p (p.id)}
+      {@const fill = stats[PRESET_STAT[p.id] ?? 'read']}
       <button
         type="button"
-        class="chip small"
+        class="chip small stat"
         class:on={prefs.presetActive(p)}
         aria-pressed={prefs.presetActive(p)}
+        style="--fill: {fill}%"
+        title="{fill}% done"
         onclick={() => prefs.togglePreset(p)}
       >
         {p.label}
+        <span class="pct">{fill}%</span>
       </button>
     {/each}
   </div>
@@ -155,13 +165,14 @@
   <p class="muted small" aria-live="polite">
     {filtered.length} technique{filtered.length === 1 ? '' : 's'}
     {#if filtersActive}· filtered{/if}
+    {#if stats.total > 0}· {stats.overall}% complete{/if}
   </p>
   {#each groups as g (g.chapter.id)}
     {@const est = establishedCount(g.chapter.id)}
     <div class="group-head">
       <h3 style="margin:0">{g.chapter.name}</h3>
       {#if showBookName}<span class="book">{g.book.name}</span>{/if}
-      {#if est.total > 0}<span class="muted small">{est.done}/{est.total} established</span>{/if}
+      {#if est.total > 0}<span class="muted small">{est.done}/{est.total} working</span>{/if}
       {#if g.chapter.sourceStatus === 'orphaned'}<span class="badge warn">not in source</span>{/if}
     </div>
     {#each g.rows as r (r.technique.id)}
@@ -185,5 +196,17 @@
 <style>
   .presets {
     margin-top: 8px;
+  }
+  .chip.stat {
+    background: linear-gradient(90deg, var(--fill-color) var(--fill), transparent var(--fill));
+    --fill-color: var(--accent-soft);
+  }
+  .chip.stat.on {
+    --fill-color: var(--ok-soft);
+    background-color: transparent;
+  }
+  .pct {
+    font-size: 0.75rem;
+    opacity: 0.8;
   }
 </style>

@@ -7,6 +7,8 @@ import {
   joinRows,
   PRESETS,
   presetActive,
+  PRESET_STAT,
+  progressStats,
   sortRows,
   type TechniqueRow,
 } from '../src/lib/model/filter';
@@ -233,5 +235,43 @@ describe('presets', () => {
     expect(f.search).toBe('guard');
     expect(f.archived).toBe('show');
     expect(f.sort).toBe('sparAsc');
+  });
+});
+
+describe('progressStats', () => {
+  it('is all zeros for an empty population', () => {
+    expect(progressStats([])).toEqual({
+      total: 0,
+      read: 0,
+      drilled: 0,
+      spar: 0,
+      working: 0,
+      overall: 0,
+    });
+  });
+
+  it('gives partial credit for sparring and full marks only at 3', () => {
+    const s = progressStats([
+      { read: true, drilled: true, sparringSuccesses: 3 },
+      { read: true, drilled: false, sparringSuccesses: 2 },
+      { read: false, drilled: false, sparringSuccesses: 0 },
+      { read: false, drilled: true, sparringSuccesses: 1 },
+    ]);
+    expect(s.total).toBe(4);
+    expect(s.read).toBe(50);
+    expect(s.drilled).toBe(50);
+    expect(s.spar).toBe(50); // 6 of 12 possible successes
+    expect(s.working).toBe(25);
+    expect(s.overall).toBe(50); // 2 + 2 + 6 = 10 of 20 points
+  });
+
+  it('is 100% only when everything is read, drilled and sparred three times', () => {
+    const done = { read: true, drilled: true, sparringSuccesses: 3 };
+    expect(progressStats([done, done]).overall).toBe(100);
+    expect(progressStats([done, { ...done, sparringSuccesses: 2 }]).overall).toBe(90);
+  });
+
+  it('maps every preset to a stat', () => {
+    for (const p of PRESETS) expect(PRESET_STAT[p.id]).toBeDefined();
   });
 });
