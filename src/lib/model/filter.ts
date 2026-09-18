@@ -177,11 +177,11 @@ const PRESET_KEYS = ['read', 'drilled', 'spar', 'practised', 'sort'] as const;
 
 export const PRESETS: Preset[] = [
   // Ordered along the learning progression: study, practise, apply, and what already works.
-  { id: 'read', label: 'To read', filters: { read: 'no', practised: 'yes', sort: 'sparDesc' } },
-  { id: 'drill', label: 'To drill', filters: { read: 'yes', drilled: 'no', sort: 'default' } },
+  { id: 'read', label: 'Read', filters: { read: 'no', practised: 'yes', sort: 'sparDesc' } },
+  { id: 'drill', label: 'Drill', filters: { read: 'yes', drilled: 'no', sort: 'default' } },
   {
     id: 'rolling',
-    label: 'To spar',
+    label: 'Spar',
     filters: { read: 'yes', drilled: 'yes', spar: 'lt3', sort: 'sparAsc' },
   },
   { id: 'established', label: 'Working', filters: { spar: '3', sort: 'default' } },
