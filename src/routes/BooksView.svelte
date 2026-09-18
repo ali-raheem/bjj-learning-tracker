@@ -1,6 +1,7 @@
 <script lang="ts">
   import { repo } from '../lib/db/repo';
-  import { importBook, parseBookFile, type BookImportSummary } from '../lib/import/bookImport';
+  import { BOOK_FILE_ACCEPT, parseAnyBookFile } from '../lib/import/anyBook';
+  import { importBook, type BookImportSummary } from '../lib/import/bookImport';
   import { ImportError } from '../lib/import/validation';
   import { data } from '../lib/ui/data.svelte';
   import { confirmAction, errorMessage, pickFile } from '../lib/ui/files';
@@ -46,10 +47,10 @@
     error = '';
     problems = [];
     summary = null;
-    const file = await pickFile();
+    const file = await pickFile(BOOK_FILE_ACCEPT);
     if (!file) return;
     try {
-      const parsed = parseBookFile(await file.text());
+      const parsed = parseAnyBookFile(await file.text(), file.name);
       const existing = data.books.find((b) => b.externalId === parsed.book.externalId);
       const n = parsed.book.chapters.reduce((s, c) => s + c.techniques.length, 0);
       const msg = existing

@@ -9,12 +9,8 @@
     type RestoreMode,
     type RestoreSummary,
   } from '../lib/import/backup';
-  import {
-    importBook,
-    parseBookFile,
-    type BookFile,
-    type BookImportSummary,
-  } from '../lib/import/bookImport';
+  import { BOOK_FILE_ACCEPT, parseAnyBookFile } from '../lib/import/anyBook';
+  import { importBook, type BookFile, type BookImportSummary } from '../lib/import/bookImport';
   import { ImportError } from '../lib/import/validation';
   import { data } from '../lib/ui/data.svelte';
   import {
@@ -91,10 +87,10 @@
 
   async function chooseBook() {
     reset();
-    const file = await pickFile();
+    const file = await pickFile(BOOK_FILE_ACCEPT);
     if (!file) return;
     try {
-      pendingBook = parseBookFile(await file.text());
+      pendingBook = parseAnyBookFile(await file.text(), file.name);
     } catch (e) {
       fail(e);
     }
@@ -193,8 +189,9 @@
 <h2>Import Book</h2>
 <div class="card">
   <p class="small muted">
-    Imports a Book definition file (a curriculum, an index of a book, a course). Re-importing a
-    newer version of the same source updates names and structure and keeps your progress.
+    Imports a Book definition file (a curriculum, an index of a book, a course), as JSON or as a
+    plain text file with “# Chapter” headings and one technique per line. Re-importing a newer
+    version of the same source updates names and structure and keeps your progress.
   </p>
   <button type="button" onclick={chooseBook}>Choose Book file…</button>
   {#if pendingBook}

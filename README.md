@@ -23,7 +23,19 @@ npm test           # unit tests
 Everything is stored in the browser's IndexedDB. Use **Backup** in the app to export a full JSON
 backup and to restore one (replace or merge).
 
-Curricula can be imported from a Book file; see `examples/example-book.json` for the format.
+Curricula can be imported from a Book file, either JSON (see `examples/example-book.json`) or
+plain text, which is easier to write in a notes app:
+
+```
+book: My Gym Curriculum
+
+# Closed guard
+Flower sweep
+Scissor sweep
+```
+
+The app imports `.txt` files directly. `books/jju.txt` is a starter for a Jiu-Jitsu University
+index. `npm run book -- books/jju.txt` converts text to JSON if you need the JSON form.
 Every book, chapter and technique carries a stable `externalId`. Re-importing a newer version of
 the same file updates names and structure while keeping your progress, notes and links. Items
 dropped by the source are kept as "orphaned" if you had recorded anything against them.

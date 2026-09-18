@@ -1,0 +1,31 @@
+// Jiu-Jitsu University technique index. Fill in from the book's contents pages.
+//
+// Format:  "# Chapter name"  starts a chapter, one technique name per line under it.
+//          Lines starting with // are comments. Blank lines are ignored.
+//          Ids are made from names automatically. Add " | some-id" after a name to pin an id,
+//          which you need when two techniques share a name, or if you plan to rename one later
+//          and want to keep its progress.
+//
+// Import this file directly from the Books screen (the app reads .txt), or convert it with:
+//          node scripts/text-to-book.mjs books/jju.txt
+//
+// Suggested chapter naming is belt plus position, so lists stay short enough to scan before
+// class. Split or merge chapters whenever you like; re-importing keeps all progress.
+
+book: Jiu-Jitsu University
+id: jju
+version: 0.1
+description: Technique index for personal study alongside the book. Names only, no content.
+
+# White · Survival | white-survival
+// e.g. Mount survival posture
+
+# Blue · Escapes | blue-escapes
+
+# Purple · Guard | purple-guard
+// e.g. Flower sweep
+// e.g. Pendulum sweep
+
+# Brown · Guard passing | brown-passing
+
+# Black · Submissions | black-submissions

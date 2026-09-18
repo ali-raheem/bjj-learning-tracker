@@ -16,6 +16,7 @@ npm test             # vitest, all tests
 npx vitest run tests/bookImport.test.ts          # one file
 npx vitest run -t "preserves user data"          # one test by name
 scripts/deploy.sh    # build and rsync dist/ to https://shoryuken.me/bjj/ (see Deployment)
+npm run book -- books/jju.txt --check   # validate a plain-text Book; drop --check to write .json
 ```
 
 Tests run in Node against `fake-indexeddb` (see `tests/setup.ts`); each test creates its own
@@ -49,6 +50,10 @@ src/lib/db/db.ts           Dexie schema (bump version + add .upgrade() on shape 
 src/lib/db/repo.ts         Repo class: every mutation, each a single transaction
 src/lib/import/bookImport.ts   Book file validation, merge-by-externalId import, Book export
 src/lib/import/backup.ts       full backup export, validation, migrate, replace/merge restore
+src/lib/import/textBook.js     plain-text Book format parser (JS with JSDoc: no imports, so the
+                               CLI can run it under plain Node); anyBook.ts picks JSON vs text
+books/jju.txt              the user's JJU transcription in the text format (source of truth
+                           for that Book; import it directly, the app reads .txt)
 src/lib/ui/data.svelte.ts  live mirror of all three tables via Dexie liveQuery
 src/lib/ui/prefs.svelte.ts filters, sort and inactive Books, persisted to localStorage
 src/routes/*.svelte        one component per screen

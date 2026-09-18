@@ -11,7 +11,8 @@
     "moduleDetection": "force",
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "types": ["vite/client", "vite-plugin-pwa/client"]
+    "types": ["vite/client", "vite-plugin-pwa/client", "node"],
+    "noEmit": true
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte", "tests/**/*.ts"]
 }
