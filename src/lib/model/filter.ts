@@ -10,6 +10,8 @@ export interface Filters {
   read: TriFilter;
   drilled: TriFilter;
   spar: SparFilter;
+  /** Drilled or used in sparring at least once: mat experience regardless of study. */
+  practised: TriFilter;
   archived: ArchivedFilter;
   sort: SortMode;
 }
@@ -19,9 +21,14 @@ export const DEFAULT_FILTERS: Filters = {
   read: 'any',
   drilled: 'any',
   spar: 'any',
+  practised: 'any',
   archived: 'hide',
   sort: 'default',
 };
+
+export function isPractised(t: { drilled: boolean; sparringSuccesses: number }): boolean {
+  return t.drilled || t.sparringSuccesses > 0;
+}
 
 export function isDefaultFilters(f: Filters): boolean {
   return (Object.keys(DEFAULT_FILTERS) as (keyof Filters)[]).every(
@@ -93,6 +100,7 @@ export function applyFilters(rows: TechniqueRow[], f: Filters, activeBookIds: Se
       matchTri(f.read, r.technique.read) &&
       matchTri(f.drilled, r.technique.drilled) &&
       matchSpar(f.spar, r.technique.sparringSuccesses) &&
+      matchTri(f.practised, isPractised(r.technique)) &&
       matchSearch(q, r),
   );
 }
@@ -162,8 +170,10 @@ export function groupByChapter(rows: TechniqueRow[]): ChapterGroup[] {
 export interface Preset {
   id: string;
   label: string;
-  filters: Partial<Pick<Filters, 'read' | 'drilled' | 'spar' | 'sort'>>;
+  filters: Partial<Pick<Filters, 'read' | 'drilled' | 'spar' | 'practised' | 'sort'>>;
 }
+
+const PRESET_KEYS = ['read', 'drilled', 'spar', 'practised', 'sort'] as const;
 
 export const PRESETS: Preset[] = [
   {
@@ -172,6 +182,11 @@ export const PRESETS: Preset[] = [
     filters: { read: 'yes', drilled: 'yes', spar: 'lt3', sort: 'sparAsc' },
   },
   { id: 'drill', label: 'Need to drill', filters: { read: 'yes', drilled: 'no', sort: 'default' } },
+  {
+    id: 'read',
+    label: 'To read',
+    filters: { read: 'no', practised: 'yes', sort: 'sparDesc' },
+  },
   { id: 'established', label: 'Established', filters: { spar: '3', sort: 'default' } },
 ];
 
@@ -188,5 +203,5 @@ export function applyPreset(current: Filters, preset: Preset): Filters {
 /** True when the current filters are exactly what this preset would produce. */
 export function presetActive(current: Filters, preset: Preset): boolean {
   const target = applyPreset(current, preset);
-  return (['read', 'drilled', 'spar', 'sort'] as const).every((k) => current[k] === target[k]);
+  return PRESET_KEYS.every((k) => current[k] === target[k]);
 }

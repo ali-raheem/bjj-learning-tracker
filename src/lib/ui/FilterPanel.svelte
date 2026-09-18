@@ -48,6 +48,14 @@
       </select>
     </label>
     <label class="field">
+      <span>Practised</span>
+      <select bind:value={prefs.filters.practised}>
+        <option value="any">Any</option>
+        <option value="yes">Drilled or sparred</option>
+        <option value="no">Neither yet</option>
+      </select>
+    </label>
+    <label class="field">
       <span>Archived</span>
       <select bind:value={prefs.filters.archived}>
         <option value="hide">Hide archived</option>

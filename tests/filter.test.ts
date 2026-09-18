@@ -81,6 +81,18 @@ describe('filters', () => {
     expect(applyFilters(rows, { ...DEFAULT_FILTERS, archived: 'show' }, all)).toHaveLength(6);
   });
 
+  it('practised filter means drilled or sparred at least once', () => {
+    expect(names(applyFilters(rows, { ...DEFAULT_FILTERS, practised: 'no' }, all))).toEqual([
+      'hipbump',
+    ]);
+    expect(names(applyFilters(rows, { ...DEFAULT_FILTERS, practised: 'yes' }, all))).toEqual([
+      'flower',
+      'scissor',
+      'kneeshield',
+      'other',
+    ]);
+  });
+
   it('combines read, drilled and sparring filters (the "try in rolling" view)', () => {
     const f = {
       ...DEFAULT_FILTERS,
@@ -170,6 +182,22 @@ describe('presets', () => {
     const drill = PRESETS.find((p) => p.id === 'drill')!;
     const f = applyPreset(DEFAULT_FILTERS, drill);
     expect(names(applyFilters(rows, f, all))).toEqual(['hipbump']);
+  });
+
+  it('"To read" surfaces unread techniques with mat experience, most sparred first', () => {
+    const toRead = PRESETS.find((p) => p.id === 'read')!;
+    const f = applyPreset(DEFAULT_FILTERS, toRead);
+    const extra = [
+      tech('unreadSparred', 'c1', 'b1', { sparringSuccesses: 2 }),
+      tech('unreadDrilled', 'c1', 'b1', { drilled: true }),
+      tech('untouched', 'c1', 'b1'),
+      tech('readAndDrilled', 'c1', 'b1', { read: true, drilled: true }),
+    ];
+    const r = joinRows(extra, chapters, books);
+    expect(names(sortRows(applyFilters(r, f, all), f.sort))).toEqual([
+      'unreadSparred',
+      'unreadDrilled',
+    ]);
   });
 
   it('"Established" surfaces sparred = 3', () => {
