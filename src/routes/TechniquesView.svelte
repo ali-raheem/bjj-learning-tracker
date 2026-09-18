@@ -9,7 +9,7 @@
     progressStats,
     sortRows,
   } from '../lib/model/filter';
-  import { loadExampleBook } from '../lib/import/example';
+  import { loadStarterBook } from '../lib/import/example';
   import BookMenu from '../lib/ui/BookMenu.svelte';
   import { data } from '../lib/ui/data.svelte';
   import { errorMessage } from '../lib/ui/files';
@@ -48,7 +48,7 @@
     loadingExample = true;
     exampleError = '';
     try {
-      await loadExampleBook();
+      await loadStarterBook();
     } catch (e) {
       exampleError = errorMessage(e);
     } finally {
@@ -141,10 +141,10 @@
   <div class="empty">
     <p>No Books yet.</p>
     <p><a class="btn primary" href={href('books')}>Add or import a Book</a></p>
-    <p class="muted small">or</p>
+    <p class="muted small">or start from a core curriculum by belt, white to black</p>
     <p>
       <button type="button" onclick={addExample} disabled={loadingExample}>
-        {loadingExample ? 'Loading…' : 'Load example Book'}
+        {loadingExample ? 'Loading…' : 'Load starter curriculum'}
       </button>
     </p>
     {#if exampleError}<p class="error">{exampleError}</p>{/if}

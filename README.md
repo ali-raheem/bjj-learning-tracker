@@ -34,8 +34,9 @@ Flower sweep
 Scissor sweep
 ```
 
-The app imports `.txt` files directly. `books/jju.txt` is a starter for a Jiu-Jitsu University
-index. `npm run book -- books/jju.txt` converts text to JSON if you need the JSON form.
+The app imports `.txt` files directly. `books/core-curriculum.txt` is the built-in starter, a
+core technique list by belt from white to black, offered on first run. `books/jju.txt` is a
+template for a Jiu-Jitsu University index. `npm run book -- books/jju.txt` converts text to JSON if you need the JSON form.
 Every book, chapter and technique carries a stable `externalId`. Re-importing a newer version of
 the same file updates names and structure while keeping your progress, notes and links. Items
 dropped by the source are kept as "orphaned" if you had recorded anything against them.

@@ -1,0 +1,296 @@
+// Core BJJ curriculum by belt. An opinionated starter list, not any book's index.
+// Built into the app: it is what "Load starter curriculum" imports on first run.
+// Edit freely; re-importing keeps your progress on unchanged ids.
+
+book: Core Curriculum
+id: core-curriculum
+version: 1.0
+description: Core techniques per belt, white to black. A starting point to edit, not a syllabus.
+
+# White · Movement & posture | white-movement
+Hip escape (shrimp)
+Bridge (upa)
+Technical stand-up
+Breakfall
+Forward and backward roll
+Base and posture on top
+Framing with forearms
+Standing up in base from guard
+
+# White · Escapes | white-escapes
+Mount escape: bridge and roll
+Mount escape: elbow-knee
+Side control escape: shrimp to guard
+Side control escape: to knees with underhook
+Knee on belly escape
+North-south escape
+Back escape: to side control
+Headlock escape: bridge over
+Headlock escape: leg over head
+
+# White · Closed guard | white-closed-guard
+Closed guard posture control
+Breaking posture with the legs
+Scissor sweep
+Hip bump sweep
+Flower sweep
+Armbar from closed guard
+Triangle from closed guard
+Kimura from closed guard
+Guillotine from closed guard
+Cross collar choke from closed guard
+Standing up in closed guard
+
+# White · Passing | white-passing
+Standing closed guard break
+Kneeling closed guard break
+Knee cut pass
+Double under pass
+Toreando pass
+Passing half guard: cross-face and underhook
+Passing to side control and settling
+
+# White · Top control | white-top-control
+Side control: cross-face and underhook
+Side control: knee on hip
+Mount: low mount with grapevines
+Mount: high mount
+Knee on belly
+Transition side control to mount
+Transition mount to back
+Turtle: taking the back with hooks
+
+# White · Submissions from top | white-top-submissions
+Americana from mount
+Armbar from mount
+Cross collar choke from mount
+Rear naked choke
+Kimura from side control
+Americana from side control
+Guillotine from front headlock
+
+# White · Standing | white-standing
+Grip fighting basics
+Double leg takedown
+Single leg takedown
+Osoto gari
+Sprawl
+Safe guard pull
+
+# Blue · Escapes | blue-escapes
+Back escape: hand fighting and scoot
+Back escape: chair sit
+Mount escape to half guard
+Turtle recovery to guard
+Armbar escape: hitchhiker
+Armbar escape: stacking
+Triangle escape: posture and stack
+Kimura defence: grab your belt
+Guillotine defence: over the shoulder
+Knee on belly escape to single leg
+
+# Blue · Half guard | blue-half-guard
+Knee shield half guard
+Underhook half guard
+Old school sweep
+Plan B sweep
+Deep half guard entry
+Deep half guard sweep
+Back take from half guard
+Half guard to dogfight
+Recovering full guard from half
+
+# Blue · Open guard | blue-open-guard
+Guard retention: leg pummeling
+Guard retention: hip escape and reframe
+Butterfly guard basic sweep
+Spider guard control
+Spider guard scissor sweep
+De la Riva hook and control
+De la Riva sweep to back
+Collar sleeve guard
+Lasso guard control
+Sit-up guard: single leg X entry
+Tripod sweep
+Sickle sweep
+
+# Blue · Passing | blue-passing
+Over-under pass
+Leg drag pass
+Stack pass
+Half guard smash pass
+Long step pass
+Headquarters position
+Passing butterfly: pinning the hooks
+Passing spider guard: breaking grips
+Passing De la Riva: knee cut
+
+# Blue · Top attacks | blue-top-attacks
+S-mount armbar
+Arm triangle from mount
+Ezekiel choke from mount
+North-south choke
+Paper cutter choke
+Bow and arrow choke
+Armbar from the back
+Baseball bat choke from knee on belly
+Darce from side control
+
+# Blue · Standing | blue-standing
+Snap down to front headlock
+Arm drag to the back
+Ankle pick
+De ashi barai (foot sweep)
+Tomoe nage
+Seoi nage
+Front headlock: go-behind
+
+# Blue · Leg locks | blue-leg-locks
+Straight ankle lock
+Ashi garami control
+Leg lock defence: hide the heel
+Escaping ashi garami
+
+# Purple · Guard systems | purple-guard-systems
+Butterfly: hook sweep to mount
+Butterfly: arm drag to back
+X guard entry
+X guard sweeps
+Single leg X sweep
+Reverse De la Riva control
+Reverse De la Riva to back
+Berimbolo
+Kiss of the dragon
+Lapel guard basics
+Shin to shin guard
+Inversion and granby roll
+
+# Purple · Passing systems | purple-passing-systems
+Body lock pass
+Floating pass
+Knee cut vs knee shield
+Back step pass
+Passing to the back: chest to back
+Passing reverse De la Riva
+Passing X guard
+Passing single leg X
+Leg weave pass
+
+# Purple · Back attacks | purple-back
+Seat belt control
+Body triangle
+Straight jacket system
+Short choke
+Armbar from the back: rolling
+Bow and arrow: from turtle
+Mount to back transitions
+Back to mount transitions
+
+# Purple · Submission chains | purple-chains
+Kimura trap system
+Front headlock system: guillotine
+Front headlock system: anaconda
+Front headlock system: darce
+Triangle to armbar to omoplata
+Mounted triangle
+Omoplata sweep
+Arm triangle from side control
+
+# Purple · Leg locks | purple-leg-locks
+Inside heel hook mechanics
+Outside heel hook mechanics
+Saddle (inside sangaku) entry
+Saddle control
+50/50 guard
+Kneebar from top
+Toe hold
+Escaping the saddle
+Escaping 50/50
+
+# Purple · Standing | purple-standing
+Body lock takedown
+Low single
+Front headlock: snap and spin
+Chain wrestling: single to double
+Uchi mata
+Guard pulling into sweep
+
+# Purple · Escapes | purple-escapes
+Escaping mounted triangle
+Escaping arm triangle
+Escaping the crucifix
+Escaping body triangle
+Escaping leg entanglements: clearing the knee line
+Escaping the darce
+
+# Brown · Pressure passing | brown-pressure
+Knee cut with cross-face pressure
+Over-under vs butterfly
+Passing inverted guard
+Passing lapel guards
+Passing with the head: shoulder pressure
+Smash pass to mount
+
+# Brown · Transitions | brown-transitions
+Side control to mount: knee slide
+Side control to mount: switch base
+Scrambles: wrestling up from guard
+Front headlock scrambles
+Turtle to guard recovery under pressure
+Counter to the back take: rolling through
+Crucifix from turtle
+
+# Brown · Submissions | brown-submissions
+Loop choke
+Clock choke
+Crucifix choke
+Bow and arrow variations
+Omoplata finishing details
+Wrist locks
+Straight armbar from side control
+Anaconda finishing details
+Bread cutter choke
+
+# Brown · Counters | brown-counters
+Countering the scissor sweep
+Countering the berimbolo
+Countering the leg drag
+Countering the knee cut
+Armbar counter: stack and pass
+Triangle counter: posture and pass
+Heel hook counter: roll and clear
+Guillotine counter: Von Flue choke
+
+# Black · Advanced guard | black-guard
+Matrix and crab ride
+Truck position
+Lapel systems: worm guard
+Reverse De la Riva to leg entanglement
+Inversion systems: back takes
+Sit-up guard to leg attacks
+
+# Black · Advanced passing | black-passing
+Combination passing: knee cut and long step
+Passing 50/50
+Passing the truck
+Passing with leg drag to back
+Passing under pressure of leg attacks
+
+# Black · Advanced submissions | black-submissions
+Buggy choke
+Gogoplata
+Baratoplata
+Tarikoplata
+Twister
+Electric chair
+Peruvian necktie
+Japanese necktie
+Outside heel hook from 50/50
+Estima lock
+
+# Black · Standing & systems | black-systems
+Harai goshi
+Chain wrestling: ties to takedowns
+Back take chains
+Submission to sweep chains
+Guard passing to leg attacks

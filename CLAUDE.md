@@ -52,6 +52,8 @@ src/lib/import/bookImport.ts   Book file validation, merge-by-externalId import,
 src/lib/import/backup.ts       full backup export, validation, migrate, replace/merge restore
 src/lib/import/textBook.js     plain-text Book format parser (JS with JSDoc: no imports, so the
                                CLI can run it under plain Node); anyBook.ts picks JSON vs text
+books/core-curriculum.txt  built-in starter Book (belt-organised core techniques), bundled via
+                           `?raw` and imported by "Load starter curriculum" on the empty screen
 books/jju.txt              the user's JJU transcription in the text format (source of truth
                            for that Book; import it directly, the app reads .txt)
 src/lib/ui/data.svelte.ts  live mirror of all three tables via Dexie liveQuery

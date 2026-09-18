@@ -98,6 +98,19 @@ Hip escape
   });
 });
 
+describe('bundled books', () => {
+  it('core curriculum parses, validates and covers all five belts', () => {
+    const f = parseTextBook(readFileSync('books/core-curriculum.txt', 'utf8'));
+    expect(f.book.externalId).toBe('core-curriculum');
+    expect(() => validateBookFile(f)).not.toThrow();
+    const belts = ['White', 'Blue', 'Purple', 'Brown', 'Black'];
+    for (const b of belts)
+      expect(f.book.chapters.some((c) => c.name.startsWith(b + ' ·'))).toBe(true);
+    const n = f.book.chapters.reduce((s, c) => s + c.techniques.length, 0);
+    expect(n).toBeGreaterThan(150);
+  });
+});
+
 describe('parseAnyBookFile', () => {
   it('detects JSON vs text by content', () => {
     const fromText = parseAnyBookFile(sample, 'jju.txt');
