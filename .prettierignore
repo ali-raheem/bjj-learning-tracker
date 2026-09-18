@@ -3,3 +3,4 @@ dist
 dev-dist
 package-lock.json
 Proposal.md
+*.md

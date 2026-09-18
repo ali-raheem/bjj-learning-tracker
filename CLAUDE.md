@@ -2,21 +2,63 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Current State
-
-This repository contains only `Proposal.md`, the full application specification for a BJJ (Brazilian Jiu-Jitsu) learning tracker. No source code, build tooling, or tests exist yet. Read `Proposal.md` in full before implementing anything; it is the source of truth for scope and behaviour.
-
-Note: the parent directory `../CLAUDE.md` belongs to an unrelated Rust project (a Fallout save editor). Ignore its commands and architecture here.
-
 ## Commands
 
-None yet. Once a stack is chosen, record here: install, dev server, build, lint, test (full suite and single test). Prefer whatever the chosen framework's conventional commands are, and keep them in `package.json` scripts (or equivalent) so this section stays short.
+```bash
+npm install
+npm run dev          # Vite dev server (hash routes: #/, #/technique/:id, #/books, #/books/:id, #/backup)
+npm run build        # production build + PWA service worker into dist/
+npm run preview      # serve dist/ on http://localhost:4173
+npm run check        # svelte-check (TypeScript + Svelte types)
+npm run lint         # prettier --check
+npm run format       # prettier --write
+npm test             # vitest, all tests
+npx vitest run tests/bookImport.test.ts          # one file
+npx vitest run -t "preserves user data"          # one test by name
+```
+
+Tests run in Node against `fake-indexeddb` (see `tests/setup.ts`); each test creates its own
+`AppDatabase` via `freshDb()` in `tests/helpers.ts`. There is no browser test suite; a Playwright
+smoke script was used manually during development.
+
+If vitest dies with `Bus error (core dumped)`, a native binary in `node_modules` is truncated
+(it happened once after an interrupted install). Fix with `rm -rf node_modules && npm ci`.
+
+## Stack and Layout
+
+Svelte 5 (runes) + Vite 7 + TypeScript, Dexie 4 over IndexedDB, `marked` + DOMPurify for notes,
+`vite-plugin-pwa` for offline/install. No router library: `src/lib/ui/router.svelte.ts` parses
+`location.hash`.
+
+```
+src/lib/model/types.ts     Book / Chapter / Technique / TechniqueLink, SourceStatus, helpers
+src/lib/model/filter.ts    pure filter, sort and group functions (tested)
+src/lib/db/db.ts           Dexie schema (bump version + add .upgrade() on shape changes)
+src/lib/db/repo.ts         Repo class: every mutation, each a single transaction
+src/lib/import/bookImport.ts   Book file validation, merge-by-externalId import, Book export
+src/lib/import/backup.ts       full backup export, validation, migrate, replace/merge restore
+src/lib/ui/data.svelte.ts  live mirror of all three tables via Dexie liveQuery
+src/lib/ui/prefs.svelte.ts filters, sort and inactive Books, persisted to localStorage
+src/routes/*.svelte        one component per screen
+examples/example-book.json sample Book file in the import format
+```
+
+Views subscribe to whole tables and filter in memory; there is no per-query IndexedDB access
+in the UI. Links are embedded as an array on the Technique record rather than a separate table.
+
+**Gotcha:** values from `data.*` or any `$state` are proxies. Pass `$state.snapshot(x)` before
+handing an object to Dexie, or IndexedDB will throw `DataCloneError`.
+
+Note: the parent directory `../CLAUDE.md` belongs to an unrelated Rust project (a Fallout save
+editor). Ignore its commands and architecture here.
 
 ## What the App Is
 
-A lightweight, local-first, offline-capable web app (phone-first, installable as a PWA later) for tracking progression through BJJ techniques. Per technique it tracks **Read** (bool), **Drilled** (bool), **Sparred** (integer 0–3, shown as three markers), Markdown notes, external links, and archived status. The core workflow is surfacing techniques that are Read + Drilled but Sparred < 3, sorted by least sparred first.
+A lightweight, local-first, offline-capable web app (phone-first, installable as a PWA) for tracking progression through BJJ techniques. Per technique it tracks **Read** (bool), **Drilled** (bool), **Sparred** (integer 0–3, shown as three markers), Markdown notes, external links, and archived status. The core workflow is surfacing techniques that are Read + Drilled but Sparred < 3, sorted by least sparred first.
 
 Navigation is minimal: **Techniques** (list, search, filters, quick progress edits), **Books** (manage sources/chapters/techniques), **Backup** (export/import/restore). No dashboards, gamification, accounts, or sync in MVP (see spec §32–33 for the exact MVP/out-of-scope lists).
+
+Full behavioural spec: `Proposal.md`. It is the source of truth for scope; §32–33 list MVP and out-of-scope items.
 
 ## Domain Model
 

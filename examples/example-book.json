@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "type": "book",
+  "book": {
+    "externalId": "example-fundamentals",
+    "name": "Example Fundamentals Curriculum",
+    "version": "1.0",
+    "description": "A small sample Book showing the import format. Copy and edit it for your own gym or course.",
+    "chapters": [
+      {
+        "externalId": "closed-guard",
+        "name": "Closed Guard",
+        "techniques": [
+          { "externalId": "closed-guard:flower-sweep", "name": "Flower Sweep" },
+          { "externalId": "closed-guard:scissor-sweep", "name": "Scissor Sweep" },
+          { "externalId": "closed-guard:hip-bump-sweep", "name": "Hip Bump Sweep" },
+          { "externalId": "closed-guard:armbar", "name": "Armbar from Closed Guard" },
+          { "externalId": "closed-guard:triangle", "name": "Triangle from Closed Guard" }
+        ]
+      },
+      {
+        "externalId": "half-guard",
+        "name": "Half Guard",
+        "techniques": [
+          { "externalId": "half-guard:knee-shield-recovery", "name": "Knee Shield Recovery" },
+          { "externalId": "half-guard:underhook-sweep", "name": "Underhook Sweep" },
+          { "externalId": "half-guard:old-school-sweep", "name": "Old School Sweep" }
+        ]
+      },
+      {
+        "externalId": "side-control",
+        "name": "Side Control",
+        "techniques": [
+          { "externalId": "side-control:frame-and-shrimp", "name": "Frame and Shrimp Escape" },
+          { "externalId": "side-control:americana", "name": "Americana" },
+          { "externalId": "side-control:knee-on-belly", "name": "Transition to Knee on Belly" }
+        ]
+      },
+      {
+        "externalId": "back",
+        "name": "Back Control",
+        "techniques": [
+          { "externalId": "back:rear-naked-choke", "name": "Rear Naked Choke" },
+          { "externalId": "back:bow-and-arrow", "name": "Bow and Arrow Choke" },
+          { "externalId": "back:escape-to-guard", "name": "Back Escape to Guard" }
+        ]
+      }
+    ]
+  }
+}

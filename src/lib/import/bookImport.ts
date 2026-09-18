@@ -82,11 +82,11 @@ export function validateBookFile(raw: unknown): BookFile {
   if (book.description !== undefined && typeof book.description !== 'string')
     p.add('book.description', 'must be a string');
   if (!Array.isArray(book.chapters)) p.add('book.chapters', 'must be an array');
-  p.throwIfAny('Invalid Book file');
 
   const chapterIds = new Set<string>();
   const techniqueIds = new Set<string>();
-  const chapters = (book.chapters as unknown[]).map((c, ci) => {
+  const rawChapters: unknown[] = Array.isArray(book.chapters) ? book.chapters : [];
+  const chapters = rawChapters.map((c, ci) => {
     const path = `book.chapters[${ci}]`;
     if (!isRecord(c)) {
       p.add(path, 'must be an object');
