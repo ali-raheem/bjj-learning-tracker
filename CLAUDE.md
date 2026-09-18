@@ -15,6 +15,7 @@ npm run format       # prettier --write
 npm test             # vitest, all tests
 npx vitest run tests/bookImport.test.ts          # one file
 npx vitest run -t "preserves user data"          # one test by name
+scripts/deploy.sh    # build and rsync dist/ to https://shoryuken.me/bjj/ (see Deployment)
 ```
 
 Tests run in Node against `fake-indexeddb` (see `tests/setup.ts`); each test creates its own
@@ -23,6 +24,17 @@ smoke script was used manually during development.
 
 If vitest dies with `Bus error (core dumped)`, a native binary in `node_modules` is truncated
 (it happened once after an interrupted install). Fix with `rm -rf node_modules && npm ci`.
+
+## Deployment
+
+Live at `https://shoryuken.me/bjj/`, served by nginx on the `ursula` server (`root@185.163.204.17`,
+Debian 12, behind Cloudflare). `scripts/deploy.sh` builds and rsyncs `dist/` to
+`/var/www/shoryuken.me/bjj/`. The app is built with `base: '/bjj/'` (see `vite.config.ts`; set
+`VITE_BASE=/` to build for root hosting). The nginx `location /bjj/` blocks live in
+`/etc/nginx/sites-enabled/shoryuken.me` next to the other subpath apps (`/cc/`, `/at/`):
+`index.html`, `sw.js` and the manifest are `no-cache` so Cloudflare never pins an old service
+worker; `/bjj/assets/` is immutable. The server has no git checkout; deploys are push-only from
+a local build.
 
 ## Stack and Layout
 
