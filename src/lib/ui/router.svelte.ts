@@ -1,3 +1,5 @@
+import { tick } from 'svelte';
+
 export type Route =
   | { name: 'techniques' }
   | { name: 'technique'; id: string }
@@ -22,14 +24,20 @@ function parse(hash: string): Route {
 
 class Router {
   route = $state<Route>(parse(typeof location === 'undefined' ? '' : location.hash));
+  /** Scroll offsets by hash so that returning to a long list lands where the user left. */
+  private scrollPositions = new Map<string, number>();
+  private currentHash = typeof location === 'undefined' ? '' : location.hash;
 
   constructor() {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('hashchange', () => {
-        this.route = parse(location.hash);
-        window.scrollTo(0, 0);
-      });
-    }
+    if (typeof window === 'undefined') return;
+    window.addEventListener('hashchange', async () => {
+      this.scrollPositions.set(this.currentHash, window.scrollY);
+      this.currentHash = location.hash;
+      this.route = parse(location.hash);
+      const y = this.scrollPositions.get(this.currentHash) ?? 0;
+      await tick();
+      requestAnimationFrame(() => window.scrollTo(0, y));
+    });
   }
 }
 

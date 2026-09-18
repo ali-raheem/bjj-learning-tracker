@@ -4,10 +4,13 @@
     groupByChapter,
     isDefaultFilters,
     joinRows,
+    PRESETS,
     sortRows,
   } from '../lib/model/filter';
+  import { loadExampleBook } from '../lib/import/example';
   import BookMenu from '../lib/ui/BookMenu.svelte';
   import { data } from '../lib/ui/data.svelte';
+  import { errorMessage } from '../lib/ui/files';
   import FilterPanel from '../lib/ui/FilterPanel.svelte';
   import { prefs } from '../lib/ui/prefs.svelte';
   import ProgressRow from '../lib/ui/ProgressRow.svelte';
@@ -27,6 +30,25 @@
   const groups = $derived(groupByChapter(filtered));
   const filtersActive = $derived(!isDefaultFilters({ ...prefs.filters, search: '' }));
   const showBookName = $derived(activeIds.size > 1);
+
+  function establishedCount(chapterId: string) {
+    const ts = data.techniquesOf(chapterId).filter((t) => !t.archived);
+    return { done: ts.filter((t) => t.sparringSuccesses >= 3).length, total: ts.length };
+  }
+
+  let loadingExample = $state(false);
+  let exampleError = $state('');
+  async function addExample() {
+    loadingExample = true;
+    exampleError = '';
+    try {
+      await loadExampleBook();
+    } catch (e) {
+      exampleError = errorMessage(e);
+    } finally {
+      loadingExample = false;
+    }
+  }
 </script>
 
 <div class="toolbar">
@@ -90,12 +112,32 @@
   {#if showBooks}
     <BookMenu onclose={() => (showBooks = false)} />
   {/if}
+  <div class="row presets" role="group" aria-label="Quick filters">
+    {#each PRESETS as p (p.id)}
+      <button
+        type="button"
+        class="chip small"
+        class:on={prefs.presetActive(p)}
+        aria-pressed={prefs.presetActive(p)}
+        onclick={() => prefs.togglePreset(p)}
+      >
+        {p.label}
+      </button>
+    {/each}
+  </div>
 </div>
 
 {#if data.books.length === 0}
   <div class="empty">
     <p>No Books yet.</p>
     <p><a class="btn primary" href={href('books')}>Add or import a Book</a></p>
+    <p class="muted small">or</p>
+    <p>
+      <button type="button" onclick={addExample} disabled={loadingExample}>
+        {loadingExample ? 'Loading…' : 'Load example Book'}
+      </button>
+    </p>
+    {#if exampleError}<p class="error">{exampleError}</p>{/if}
   </div>
 {:else if activeIds.size === 0}
   <div class="empty">
@@ -115,9 +157,11 @@
     {#if filtersActive}· filtered{/if}
   </p>
   {#each groups as g (g.chapter.id)}
+    {@const est = establishedCount(g.chapter.id)}
     <div class="group-head">
       <h3 style="margin:0">{g.chapter.name}</h3>
       {#if showBookName}<span class="book">{g.book.name}</span>{/if}
+      {#if est.total > 0}<span class="muted small">{est.done}/{est.total} established</span>{/if}
       {#if g.chapter.sourceStatus === 'orphaned'}<span class="badge warn">not in source</span>{/if}
     </div>
     {#each g.rows as r (r.technique.id)}
@@ -137,3 +181,9 @@
     {/each}
   {/each}
 {/if}
+
+<style>
+  .presets {
+    margin-top: 8px;
+  }
+</style>

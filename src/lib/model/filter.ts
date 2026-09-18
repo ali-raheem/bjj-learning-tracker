@@ -58,7 +58,8 @@ function matchArchived(f: ArchivedFilter, archived: boolean): boolean {
 
 function matchSearch(q: string, row: TechniqueRow): boolean {
   if (!q) return true;
-  const hay = `${row.technique.name}\n${row.chapter.name}\n${row.book.name}`.toLowerCase();
+  const hay =
+    `${row.technique.name}\n${row.chapter.name}\n${row.book.name}\n${row.technique.notesMarkdown}`.toLowerCase();
   return q
     .toLowerCase()
     .split(/\s+/)
@@ -153,4 +154,39 @@ export function groupByChapter(rows: TechniqueRow[]): ChapterGroup[] {
     g.rows.push(row);
   }
   return groups;
+}
+
+// ---------------------------------------------------------------- presets
+
+/** One-tap filter shortcuts. They only set filters; nothing is stored on techniques. */
+export interface Preset {
+  id: string;
+  label: string;
+  filters: Partial<Pick<Filters, 'read' | 'drilled' | 'spar' | 'sort'>>;
+}
+
+export const PRESETS: Preset[] = [
+  {
+    id: 'rolling',
+    label: 'Try in rolling',
+    filters: { read: 'yes', drilled: 'yes', spar: 'lt3', sort: 'sparAsc' },
+  },
+  { id: 'drill', label: 'Need to drill', filters: { read: 'yes', drilled: 'no', sort: 'default' } },
+  { id: 'established', label: 'Established', filters: { spar: '3', sort: 'default' } },
+];
+
+/** Filters with the preset applied. Search and the archived setting are left as they are. */
+export function applyPreset(current: Filters, preset: Preset): Filters {
+  return {
+    ...DEFAULT_FILTERS,
+    search: current.search,
+    archived: current.archived,
+    ...preset.filters,
+  };
+}
+
+/** True when the current filters are exactly what this preset would produce. */
+export function presetActive(current: Filters, preset: Preset): boolean {
+  const target = applyPreset(current, preset);
+  return (['read', 'drilled', 'spar', 'sort'] as const).every((k) => current[k] === target[k]);
 }

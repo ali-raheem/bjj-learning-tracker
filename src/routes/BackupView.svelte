@@ -17,7 +17,14 @@
   } from '../lib/import/bookImport';
   import { ImportError } from '../lib/import/validation';
   import { data } from '../lib/ui/data.svelte';
-  import { confirmAction, downloadJson, errorMessage, pickFile } from '../lib/ui/files';
+  import {
+    confirmAction,
+    errorMessage,
+    formatRelativeDays,
+    pickFile,
+    shareOrDownloadJson,
+  } from '../lib/ui/files';
+  import { prefs } from '../lib/ui/prefs.svelte';
 
   let error = $state('');
   let problems = $state<string[]>([]);
@@ -33,6 +40,7 @@
     restoreResult = null;
     pendingBook = null;
     bookResult = null;
+    exportOutcome = '';
   }
   function fail(e: unknown) {
     if (e instanceof ImportError) {
@@ -41,10 +49,15 @@
     } else error = errorMessage(e);
   }
 
+  let exportOutcome = $state('');
   async function doExport() {
     reset();
     try {
-      downloadJson(await exportBackup(), backupFilename());
+      const outcome = await shareOrDownloadJson(await exportBackup(), backupFilename());
+      if (outcome !== 'cancelled') {
+        prefs.markBackedUp();
+        exportOutcome = outcome === 'shared' ? 'Backup shared.' : 'Backup downloaded.';
+      }
     } catch (e) {
       fail(e);
     }
@@ -133,7 +146,12 @@
   <p class="small">
     {data.books.length} Books · {data.chapters.length} chapters · {data.techniques.length} techniques
   </p>
-  <button type="button" class="primary" onclick={doExport}>Download full backup</button>
+  <p class="small" class:error={prefs.backupDue()} class:muted={!prefs.backupDue()}>
+    Last backup: {formatRelativeDays(prefs.backupAgeDays())}
+    {#if prefs.backupDue()}— it's a good time to make one{/if}
+  </p>
+  <button type="button" class="primary" onclick={doExport}>Export backup</button>
+  {#if exportOutcome}<p class="success small">{exportOutcome}</p>{/if}
 </div>
 
 <h2>Restore backup</h2>

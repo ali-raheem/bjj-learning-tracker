@@ -2,8 +2,11 @@ import { describe, expect, it } from 'vitest';
 import {
   DEFAULT_FILTERS,
   applyFilters,
+  applyPreset,
   groupByChapter,
   joinRows,
+  PRESETS,
+  presetActive,
   sortRows,
   type TechniqueRow,
 } from '../src/lib/model/filter';
@@ -57,6 +60,12 @@ const techniques = [
 const rows = joinRows(techniques, chapters, books);
 const all = new Set(['b1', 'b2']);
 const names = (r: TechniqueRow[]) => r.map((x) => x.technique.id);
+
+const notedTechniques = [
+  tech('flower', 'c1', 'b1', { notesMarkdown: 'outside foot externally rotated' }),
+  tech('scissor', 'c1', 'b1', { notesMarkdown: 'grip the sleeve first' }),
+];
+const notedRows = joinRows(notedTechniques, chapters, books);
 
 describe('filters', () => {
   it('joins and drops dangling references', () => {
@@ -133,5 +142,68 @@ describe('filters', () => {
     const g = groupByChapter(sortRows(applyFilters(rows, DEFAULT_FILTERS, all), 'sparAsc'));
     expect(g.map((x) => x.chapter.id)).toEqual(['c1', 'c3', 'c2']);
     expect(g[0]!.rows.map((r) => r.technique.id)).toEqual(['scissor', 'hipbump', 'flower']);
+  });
+});
+
+describe('search over notes', () => {
+  it('matches notes text alongside name/chapter/book', () => {
+    expect(
+      names(applyFilters(notedRows, { ...DEFAULT_FILTERS, search: 'externally rotated' }, all)),
+    ).toEqual(['flower']);
+    expect(names(applyFilters(notedRows, { ...DEFAULT_FILTERS, search: 'sleeve' }, all))).toEqual([
+      'scissor',
+    ]);
+    expect(
+      names(applyFilters(notedRows, { ...DEFAULT_FILTERS, search: 'nonexistent' }, all)),
+    ).toEqual([]);
+  });
+});
+
+describe('presets', () => {
+  it('"Try in rolling" surfaces read+drilled, sparred<3, least sparred first', () => {
+    const rolling = PRESETS.find((p) => p.id === 'rolling')!;
+    const f = applyPreset(DEFAULT_FILTERS, rolling);
+    expect(names(sortRows(applyFilters(rows, f, all), f.sort))).toEqual(['scissor', 'flower']);
+  });
+
+  it('"Need to drill" surfaces read but not drilled', () => {
+    const drill = PRESETS.find((p) => p.id === 'drill')!;
+    const f = applyPreset(DEFAULT_FILTERS, drill);
+    expect(names(applyFilters(rows, f, all))).toEqual(['hipbump']);
+  });
+
+  it('"Established" surfaces sparred = 3', () => {
+    const established = PRESETS.find((p) => p.id === 'established')!;
+    const f = applyPreset(DEFAULT_FILTERS, established);
+    expect(names(applyFilters(rows, f, all))).toEqual(['kneeshield']);
+  });
+
+  it('presetActive detects a match regardless of how filters were set, and ignores search/archived', () => {
+    const rolling = PRESETS.find((p) => p.id === 'rolling')!;
+    const manual = {
+      ...DEFAULT_FILTERS,
+      read: 'yes' as const,
+      drilled: 'yes' as const,
+      spar: 'lt3' as const,
+      sort: 'sparAsc' as const,
+      search: 'guard',
+      archived: 'show' as const,
+    };
+    expect(presetActive(manual, rolling)).toBe(true);
+    expect(presetActive(DEFAULT_FILTERS, rolling)).toBe(false);
+  });
+
+  it('applyPreset preserves search and archived but resets everything else to default', () => {
+    const rolling = PRESETS.find((p) => p.id === 'rolling')!;
+    const from = {
+      ...DEFAULT_FILTERS,
+      search: 'guard',
+      archived: 'show' as const,
+      sort: 'name' as const,
+    };
+    const f = applyPreset(from, rolling);
+    expect(f.search).toBe('guard');
+    expect(f.archived).toBe('show');
+    expect(f.sort).toBe('sparAsc');
   });
 });
