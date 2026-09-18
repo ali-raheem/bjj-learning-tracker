@@ -176,18 +176,15 @@ export interface Preset {
 const PRESET_KEYS = ['read', 'drilled', 'spar', 'practised', 'sort'] as const;
 
 export const PRESETS: Preset[] = [
+  // Ordered along the learning progression: study, practise, apply, and what already works.
+  { id: 'read', label: 'To read', filters: { read: 'no', practised: 'yes', sort: 'sparDesc' } },
+  { id: 'drill', label: 'To drill', filters: { read: 'yes', drilled: 'no', sort: 'default' } },
   {
     id: 'rolling',
-    label: 'Try in rolling',
+    label: 'To spar',
     filters: { read: 'yes', drilled: 'yes', spar: 'lt3', sort: 'sparAsc' },
   },
-  { id: 'drill', label: 'Need to drill', filters: { read: 'yes', drilled: 'no', sort: 'default' } },
-  {
-    id: 'read',
-    label: 'To read',
-    filters: { read: 'no', practised: 'yes', sort: 'sparDesc' },
-  },
-  { id: 'established', label: 'Established', filters: { spar: '3', sort: 'default' } },
+  { id: 'established', label: 'Working', filters: { spar: '3', sort: 'default' } },
 ];
 
 /** Filters with the preset applied. Search and the archived setting are left as they are. */
