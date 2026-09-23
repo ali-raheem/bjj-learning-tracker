@@ -90,11 +90,16 @@ Hip escape
     expect(() => parseTextBook('book: X')).toThrow(/no chapters/);
   });
 
-  it('accepts the starter file in books/', () => {
+  it('accepts the users transcribed JJU table of contents', () => {
     const f = parseTextBook(readFileSync('books/jju.txt', 'utf8'));
     expect(f.book.externalId).toBe('jju');
-    expect(f.book.chapters).toHaveLength(5);
+    expect(f.book.chapters.length).toBeGreaterThan(30);
     expect(() => validateBookFile(f)).not.toThrow();
+    const ids = f.book.chapters.flatMap((c) => c.techniques.map((t) => t.externalId));
+    expect(new Set(ids).size).toBe(ids.length); // every pinned id is unique despite repeated titles
+    expect(f.book.chapters.some((c) => c.name.includes('Common Misconceptions') === false)).toBe(
+      true,
+    );
   });
 });
 

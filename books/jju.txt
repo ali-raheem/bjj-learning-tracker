@@ -1,31 +1,343 @@
-// Jiu-Jitsu University technique index. Fill in from the book's contents pages.
+// Jiu-Jitsu University — full technique index transcribed from the table of
+// contents of the user's own copy. Chapter and lesson numbers match the book
+// exactly (e.g. "17-11") so you can look anything up by page. Ids are pinned to
+// those numbers, since some titles ("Common Misconceptions") repeat across
+// chapters and would otherwise collide.
 //
-// Format:  "# Chapter name"  starts a chapter, one technique name per line under it.
-//          Lines starting with // are comments. Blank lines are ignored.
-//          Ids are made from names automatically. Add " | some-id" after a name to pin an id,
-//          which you need when two techniques share a name, or if you plan to rename one later
-//          and want to keep its progress.
+// See books/jju-toc.md for the same structure as a readable reference document.
 //
-// Import this file directly from the Books screen (the app reads .txt), or convert it with:
-//          node scripts/text-to-book.mjs books/jju.txt
-//
-// Suggested chapter naming is belt plus position, so lists stay short enough to scan before
-// class. Split or merge chapters whenever you like; re-importing keeps all progress.
+// Format: "# Chapter name" starts a chapter, one technique per line under it,
+// "| some-id" pins an id. Re-importing this file after edits keeps all progress
+// on unchanged ids. node scripts/text-to-book.mjs books/jju.txt --check validates.
 
 book: Jiu-Jitsu University
 id: jju
-version: 0.1
-description: Technique index for personal study alongside the book. Names only, no content.
+version: 1.0
+description: Full technique index transcribed from the table of contents. Names only, no instructional content.
 
-# White · Survival | white-survival
-// e.g. Mount survival posture
+// ==== Survival ====
+# Survival · 1.0 The Back | jju-ch1
+The Back Survival Position | jju-1-0
+Hand Fighting | jju-1-1
+The Scoop | jju-1-2
+Common Misconceptions | jju-1-3
 
-# Blue · Escapes | blue-escapes
+# Survival · 2.0 All-Fours | jju-ch2
+Surviving All-Fours Back Position | jju-2-0
+Solo All-Fours Survival | jju-2-1
+All-Fours Survival Drill | jju-2-2
+All-Fours Detail | jju-2-3
+Rolling To Back Survival | jju-2-4
+Common Misconceptions | jju-2-5
 
-# Purple · Guard | purple-guard
-// e.g. Flower sweep
-// e.g. Pendulum sweep
+# Survival · 3.0 The Mount | jju-ch3
+Surviving The Mount | jju-3-0
+Solo Mount Survival Drill | jju-3-1
+Early Posture | jju-3-2
+Nullifying The Choke | jju-3-3
+Error In Choke Survival | jju-3-4
+Seated Mount Survival | jju-3-5
+Common Misconceptions | jju-3-6
 
-# Brown · Guard passing | brown-passing
+# Survival · 4.0 Side Control | jju-ch4
+Side Control Survival | jju-4-0
+Blocking The Cross-Face | jju-4-1
+Releasing The Hand | jju-4-2
+Kesa Gatame Hand Fighting | jju-4-3
+Reverse Kesa Gatame | jju-4-4
+Common Misconceptions | jju-4-5
 
-# Black · Submissions | black-submissions
+# Survival · 5.0 Knee-On-Belly | jju-ch5
+Knee-On-Belly Survival | jju-5-0
+Solo Knee-On-Belly Prevention | jju-5-1
+Straight-Legged Prevention | jju-5-2
+Importance Of Prevention | jju-5-3
+Running Survival Posture | jju-5-4
+Exposed Roll | jju-5-5
+Common Misconceptions | jju-5-6
+
+# Survival · 6.0 The Back (Escaping) | jju-ch6
+Escaping The Back | jju-6-0
+Common Mistake | jju-6-1
+Body Lock Escape | jju-6-2
+Escaping Double-Underhook Control | jju-6-3
+Escaping All-Fours Drill | jju-6-4
+
+// ==== Escapes ====
+# Escapes · 7.0 The Mount | jju-ch7
+Solo Mount Elbow Escape Drill | jju-7-0
+Mount Elbow Escape | jju-7-1
+Seated Mount Escape | jju-7-2
+
+# Escapes · 8.0 Side Control | jju-ch8
+Solo Side Control Drills | jju-8-0
+Side Control To Guard Recovery | jju-8-1
+Side Control Escape To The Knees | jju-8-2
+Side Control Running Escape | jju-8-3
+Escape From Kesa Gatame | jju-8-4
+Escape From Reverse Kesa Gatame | jju-8-5
+Escape Against Wrestler's Pin | jju-8-6
+
+# Escapes · 9.0 Knee-On-Belly | jju-ch9
+Knee-On-Belly Running Escape | jju-9-0
+
+# Escapes · 10.0 Armbar | jju-ch10
+Armbar Escape Movement Drill | jju-10-0
+Common Misconceptions | jju-10-1
+Armbar Escape To Guard Pass | jju-10-2
+Armbar Escape To Guard Pass 2 | jju-10-3
+Armbar Escape From Bottom | jju-10-4
+
+# Escapes · 11.0 Triangle | jju-ch11
+Triangle Escape To Pass | jju-11-0
+Common Misconceptions | jju-11-1
+
+# Escapes · 12.0 Guillotine | jju-ch12
+Classic Guillotine Escape | jju-12-0
+Arm-In Guillotine Escape | jju-12-1
+
+# Escapes · 13.0 Footlock | jju-ch13
+Solo Footlock Escape Drill | jju-13-0
+Footlock Escape From Guard | jju-13-1
+
+# Escapes · 14.0 Kimura | jju-ch14
+Kimura Escape From Half Guard | jju-14-0
+Kimura Escape To Armbar Posture | jju-14-1
+
+# Escapes · A. Closed Guard Against Kneeling Opponent | jju-ch15
+Closed Guard Arm Wrap | jju-15-0
+Solo Arm Wrap Choke To Straight Armlock | jju-15-1
+Arm Wrap Choke To Straight Armlock | jju-15-2
+Closed Guard Overwrap | jju-15-3
+Overwrap To Back | jju-15-4
+Scissor / Knee Shield | jju-15-5
+Classic Armbar | jju-15-6
+Armbar To Cross Choke Drill | jju-15-7
+Brabo Choke | jju-15-8
+Classic Triangle Choke | jju-15-9
+Solo Hip Bump Sweep | jju-15-10
+Hip Bump Sweep | jju-15-11
+Flower Sweep | jju-15-12
+
+# Escapes · B. Closed Guard Against Standing Opponent | jju-ch16
+Frustrating Standing Base | jju-16-0
+Hip Push Sweep | jju-16-1
+Classic Underhook Sweep | jju-16-2
+Rollout Against Underhook Defense | jju-16-3
+Common Misconceptions | jju-16-4
+
+# Escapes · 17.0 Guard Pass Defense | jju-ch17
+Single Under-The-Leg Pass Defense | jju-17-1
+Double Under-The-Legs Defense To Sweep | jju-17-2
+Leg-Squeeze Defense | jju-17-3
+Failed Leg-Squeeze Defense | jju-17-4
+Over-And-Under Smash Defense | jju-17-5
+Failed Over-And-Under Smash Defense | jju-17-6
+Same-Side Knee Block | jju-17-7
+Failed Same-Side Knee Block | jju-17-8
+Knee-Slide Block | jju-17-9
+Early Torreando Grip Break | jju-17-10
+Collar Drag Off Torreando Defense | jju-17-11
+Ankle Pick Off Torreando Defense | jju-17-12
+Late Torreando Block | jju-17-13
+Two-Handed Torreando Block | jju-17-14
+Straight Armlock | jju-17-15
+Omoplata Off Straight Armlock | jju-17-16
+
+// ==== The Guard ====
+# The Guard · 18-0 Butterfly Guard | jju-ch18
+Control And Distance | jju-18-1
+Control And Movement | jju-18-2
+Solo Butterfly Sweep | jju-18-3
+Classic Butterfly Sweep | jju-18-4
+Failed Butterfly Sweep | jju-18-5
+Wing Sweep | jju-18-6
+Straight Armlock Drill | jju-18-7
+Classic Cross-Choke | jju-18-8
+Palm Up-Palm Down Choke | jju-18-9
+
+# The Guard · 19-0 Spider Guard | jju-ch19
+Control And Movement | jju-19-1
+Failed Control And Movement | jju-19-2
+Sweep Off A Pass | jju-19-3
+
+# The Guard · 20-0 Cross-Grip Guard | jju-ch20
+Posture | jju-20-1
+Failed Posture | jju-20-2
+Classic Tripod Sweep | jju-20-3
+Cross-Grip Backroll Sweep | jju-20-4
+
+# The Guard · 21-0 De La Riva | jju-ch21
+Starting Position | jju-21-1
+Posture Blocked | jju-21-2
+Rollover Sweep | jju-21-3
+De La Riva To Tomoe-Nage Sweep | jju-21-4
+
+# The Guard · 22-0 Sit-Up Guard | jju-ch22
+Posture Drill | jju-22-1
+Sit-Up Guard To Classic Sweep | jju-22-2
+Reverse Roll Sweep | jju-22-3
+Failed Reverse Roll Sweep | jju-22-4
+
+# The Guard · 23-0 Reverse De La Riva Guard | jju-ch23
+Positioning | jju-23-1
+Reverse De La Riva Drill | jju-23-2
+Failed Positioning | jju-23-3
+Knee Push Sweep | jju-23-4
+
+# The Guard · 24-0 Half Guard | jju-ch24
+Regaining Guard Or Control | jju-24-1
+Improper Control | jju-24-2
+Deep Control | jju-24-3
+Getting Even Deeper | jju-24-4
+Backdoor To Back | jju-24-5
+Bottom Armlock - Kimura | jju-24-6
+Incorrect Kimura | jju-24-7
+
+// ==== Guard Passing ====
+# Guard Passing · A. Passing The Closed Guard From The Knees | jju-ch25a
+Blocking The Collar Grip | jju-25-0
+Defeating The Cross-Collar Grip | jju-25-1
+Overhook Guard Escape | jju-25-2
+Escaping Over-The-Shoulder Belt Grip | jju-25-3
+Classic Opening On The Knees | jju-25-4
+Blocking The Triangle | jju-25-5
+Failed Triangle Block | jju-25-6
+Opening When Opponent Hides Both Arms | jju-25-7
+Basic Single Underhook Opening | jju-25-8
+Basic Underhook Pass | jju-25-9
+Beating The Blocked Hip | jju-25-10
+Basic Underhook Pass Variation | jju-25-11
+Double Underhook Pass | jju-25-12
+Double Underhook Pass Variation | jju-25-13
+Combat Base To Basic Pass | jju-25-14
+
+# Guard Passing · B. Passing The Guard From Standing | jju-ch25b
+Base Warm-Up | jju-25-15
+Standing Correctly Vs. Incorrectly | jju-25-16
+Standing Opening With Hip Pressure | jju-25-17
+Defensive Squatting & Standing Open | jju-25-18
+Open When Opponent Hides One Arm | jju-25-19
+Open Against Long Legs | jju-25-20
+Armpit Grip Opening & Bridge Defeating | jju-25-21
+Opening Against Double Underhooks | jju-25-22
+
+# Guard Passing · 26-0 Core Open Guard Passes | jju-ch26
+Leg Rope Front | jju-26-1
+Leg Rope Back | jju-26-2
+Leg Rope Side Switch & Smash | jju-26-3
+Knee Cross Pass | jju-26-4
+Knee Cross Against Lapel Grip | jju-26-5
+Angle Change To Knee Pass | jju-26-6
+Torreando & Approach | jju-26-7
+Torreando Against One Hook | jju-26-8
+Torreando W/ Hip Control Drill | jju-26-9
+Two-On-One Leg Pass | jju-26-11
+
+# Guard Passing · 27-0 Butterfly Guard Passes | jju-ch27
+Posture & Balance | jju-27-1
+Flat Butterfly-Walk-Around Pass | jju-27-2
+Wallid Ismael Variation | jju-27-3
+Wrap-The-Legs Pass | jju-27-4
+Hand Plant Pass | jju-27-5
+Level Change Pass | jju-27-6
+Forward Knee-Press Pass | jju-27-7
+Passing The Cross-Grip | jju-27-8
+Floating Hip-Switch Pass | jju-27-9
+Floating Hip-Switch Against Pant Grab | jju-27-10
+The Star Pass | jju-27-11
+Transition To Mount Off Pass | jju-27-12
+Stand-Up Wheel Pass | jju-27-13
+X Pass | jju-27-14
+Shin-To-Shin Pass | jju-27-15
+
+# Guard Passing · 28-0 Spider Guard Passes | jju-ch28
+Break & Pass | jju-28-1
+Leg Lasso Pass | jju-28-2
+
+# Guard Passing · 29-0 Cross Grip Passes | jju-ch29
+Same Side Pass | jju-29-1
+
+# Guard Passing · 30-0 De La Riva Passes | jju-ch30
+Unlock & Pass | jju-30-1
+Hook Escape Pass | jju-30-2
+Passing The Deep De La Riva | jju-30-3
+
+# Guard Passing · 31-0 Sit-Up Guard Passes | jju-ch31
+Step-Around Pass | jju-31-1
+Underhook To Mount | jju-31-2
+Underhook To Knee-Up-The-Middle Variation | jju-31-3
+
+# Guard Passing · 32-0 Reverse De La Riva Passes | jju-ch32
+Hip Smash | jju-32-1
+Floating Pass | jju-32-2
+
+# Guard Passing · 33-0 Inverted Guard Passes | jju-ch33
+Hip Pass | jju-33-1
+Danger Of Circling | jju-33-2
+
+# Guard Passing · 34-0 Passing The X-Guard | jju-ch34
+Balance Ball Break & Pass | jju-34-1
+Break & Pass | jju-34-2
+
+# Guard Passing · 35-0 Half Guard Passes | jju-ch35
+Flattening The Opponent | jju-35-1
+Straight Leg Pass With Knee Block | jju-35-2
+Base-Switch Pass With Shin | jju-35-3
+Blocked Arm Pass | jju-35-4
+Xande's Flattening Pass | jju-35-5
+Shin Slide Pass | jju-35-6
+Esgrima Pass | jju-35-7
+Esgrima Mount | jju-35-8
+Fredson Alves' Esgrima Pass | jju-35-9
+Whizzer Armbar Feint Pass | jju-35-10
+The Opposite Side Pass | jju-35-11
+Opposite Pass Against Underhook | jju-35-12
+Opposite-Side Pass To Mount | jju-35-13
+Half Mount Pass | jju-35-14
+Half Mount To Knee Cross | jju-35-15
+Deep Half-Leg Pullout | jju-35-16
+Half Butterfly Hip-Switch | jju-35-17
+Open Half Guard Hip-Drive Pass | jju-35-18
+Open Half Guard Lemon Squeeze Pass | jju-35-19
+
+// ==== Submissions ====
+# Submissions · 36-0 The Back | jju-ch36
+Getting The Collar: Bow & Arrow Choke | jju-36-1
+Armbar Against Choke Defense | jju-36-2
+Arm & Collar Choke | jju-36-3
+Ezequiel Choke From The Back | jju-36-4
+
+# Submissions · 37-0 The Mount | jju-ch37
+The Americana | jju-37-1
+Mounted Armbar | jju-37-2
+Ezequiel | jju-37-3
+Kata Gatame | jju-37-4
+Palm Up/Palm Down Choke | jju-37-5
+Palm Up/Palm Up Choke | jju-37-6
+Triangle Choke | jju-37-7
+S-Mount Cross Choke | jju-37-8
+S-Mount Armbar | jju-37-9
+Kata Gatame To Ezequiel | jju-37-10
+Collar Choke Drill | jju-37-11
+
+# Submissions · 38-0 Side Control | jju-ch38
+Kimura | jju-38-1
+Walk-Around Armbar | jju-38-2
+Royler's Armbar | jju-38-3
+Spinning Armbar | jju-38-4
+Failed Spinning Armbar | jju-38-5
+Spinning Armbar To Kimura | jju-38-6
+Step-Over Choke | jju-38-7
+Bread Cutter Choke | jju-38-8
+Baseball Choke | jju-38-9
+
+# Submissions · 39-0 Turtle Top | jju-ch39
+Clock Choke | jju-39-1
+
+# Submissions · 40-0 Half Guard | jju-ch40
+Brabo Choke | jju-40-1
+Brabo To Straight Armlock | jju-40-2
+
+# Submissions · 41-0 Guard Top | jju-ch41
+Straight Ankle Lock | jju-41-1

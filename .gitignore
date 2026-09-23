@@ -4,3 +4,7 @@ dev-dist/
 .vite/
 *.local
 .DS_Store
+
+# Photos of book pages used to transcribe a table of contents: never commit these.
+JJU_TOC.zip
+*.book-photos/
