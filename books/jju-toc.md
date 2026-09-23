@@ -2,9 +2,11 @@
 
 Transcribed from the table of contents of the user's own copy: chapter and lesson
 titles only, in the book's own order and numbering, for reference and as the basis
-of `books/jju.txt` (the importable version for the BJJ tracker app).
+of `books/jju.txt` (the importable version for the BJJ tracker app). "Common
+Misconceptions" / "Common Mistake" entries are omitted as discussion asides rather
+than techniques.
 
-**42 chapters, 238 techniques.**
+**42 chapters, 229 techniques.**
 
 ## Survival
 
@@ -13,7 +15,6 @@ of `books/jju.txt` (the importable version for the BJJ tracker app).
 - `1-0` The Back Survival Position
 - `1-1` Hand Fighting
 - `1-2` The Scoop
-- `1-3` Common Misconceptions
 
 ### 2.0 All-Fours
 
@@ -22,7 +23,6 @@ of `books/jju.txt` (the importable version for the BJJ tracker app).
 - `2-2` All-Fours Survival Drill
 - `2-3` All-Fours Detail
 - `2-4` Rolling To Back Survival
-- `2-5` Common Misconceptions
 
 ### 3.0 The Mount
 
@@ -32,7 +32,6 @@ of `books/jju.txt` (the importable version for the BJJ tracker app).
 - `3-3` Nullifying The Choke
 - `3-4` Error In Choke Survival
 - `3-5` Seated Mount Survival
-- `3-6` Common Misconceptions
 
 ### 4.0 Side Control
 
@@ -41,7 +40,6 @@ of `books/jju.txt` (the importable version for the BJJ tracker app).
 - `4-2` Releasing The Hand
 - `4-3` Kesa Gatame Hand Fighting
 - `4-4` Reverse Kesa Gatame
-- `4-5` Common Misconceptions
 
 ### 5.0 Knee-On-Belly
 
@@ -51,12 +49,10 @@ of `books/jju.txt` (the importable version for the BJJ tracker app).
 - `5-3` Importance Of Prevention
 - `5-4` Running Survival Posture
 - `5-5` Exposed Roll
-- `5-6` Common Misconceptions
 
 ### 6.0 The Back (Escaping)
 
 - `6-0` Escaping The Back
-- `6-1` Common Mistake
 - `6-2` Body Lock Escape
 - `6-3` Escaping Double-Underhook Control
 - `6-4` Escaping All-Fours Drill
@@ -86,7 +82,6 @@ of `books/jju.txt` (the importable version for the BJJ tracker app).
 ### 10.0 Armbar
 
 - `10-0` Armbar Escape Movement Drill
-- `10-1` Common Misconceptions
 - `10-2` Armbar Escape To Guard Pass
 - `10-3` Armbar Escape To Guard Pass 2
 - `10-4` Armbar Escape From Bottom
@@ -94,7 +89,6 @@ of `books/jju.txt` (the importable version for the BJJ tracker app).
 ### 11.0 Triangle
 
 - `11-0` Triangle Escape To Pass
-- `11-1` Common Misconceptions
 
 ### 12.0 Guillotine
 
@@ -133,7 +127,6 @@ of `books/jju.txt` (the importable version for the BJJ tracker app).
 - `16-1` Hip Push Sweep
 - `16-2` Classic Underhook Sweep
 - `16-3` Rollout Against Underhook Defense
-- `16-4` Common Misconceptions
 
 ### 17.0 Guard Pass Defense
 

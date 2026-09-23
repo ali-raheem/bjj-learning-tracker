@@ -2,7 +2,11 @@
 // contents of the user's own copy. Chapter and lesson numbers match the book
 // exactly (e.g. "17-11") so you can look anything up by page. Ids are pinned to
 // those numbers, since some titles ("Common Misconceptions") repeat across
-// chapters and would otherwise collide.
+// chapters and would otherwise collide. Numbering has gaps where an entry was
+// omitted (see below), which is expected.
+//
+// "Common Misconceptions" / "Common Mistake" entries are left out: they are
+// discussion asides in the book, not techniques you can read/drill/spar.
 //
 // See books/jju-toc.md for the same structure as a readable reference document.
 //
@@ -12,7 +16,7 @@
 
 book: Jiu-Jitsu University
 id: jju
-version: 1.0
+version: 1.1
 description: Full technique index transcribed from the table of contents. Names only, no instructional content.
 
 // ==== Survival ====
@@ -20,7 +24,6 @@ description: Full technique index transcribed from the table of contents. Names 
 The Back Survival Position | jju-1-0
 Hand Fighting | jju-1-1
 The Scoop | jju-1-2
-Common Misconceptions | jju-1-3
 
 # Survival · 2.0 All-Fours | jju-ch2
 Surviving All-Fours Back Position | jju-2-0
@@ -28,7 +31,6 @@ Solo All-Fours Survival | jju-2-1
 All-Fours Survival Drill | jju-2-2
 All-Fours Detail | jju-2-3
 Rolling To Back Survival | jju-2-4
-Common Misconceptions | jju-2-5
 
 # Survival · 3.0 The Mount | jju-ch3
 Surviving The Mount | jju-3-0
@@ -37,7 +39,6 @@ Early Posture | jju-3-2
 Nullifying The Choke | jju-3-3
 Error In Choke Survival | jju-3-4
 Seated Mount Survival | jju-3-5
-Common Misconceptions | jju-3-6
 
 # Survival · 4.0 Side Control | jju-ch4
 Side Control Survival | jju-4-0
@@ -45,7 +46,6 @@ Blocking The Cross-Face | jju-4-1
 Releasing The Hand | jju-4-2
 Kesa Gatame Hand Fighting | jju-4-3
 Reverse Kesa Gatame | jju-4-4
-Common Misconceptions | jju-4-5
 
 # Survival · 5.0 Knee-On-Belly | jju-ch5
 Knee-On-Belly Survival | jju-5-0
@@ -54,11 +54,9 @@ Straight-Legged Prevention | jju-5-2
 Importance Of Prevention | jju-5-3
 Running Survival Posture | jju-5-4
 Exposed Roll | jju-5-5
-Common Misconceptions | jju-5-6
 
 # Survival · 6.0 The Back (Escaping) | jju-ch6
 Escaping The Back | jju-6-0
-Common Mistake | jju-6-1
 Body Lock Escape | jju-6-2
 Escaping Double-Underhook Control | jju-6-3
 Escaping All-Fours Drill | jju-6-4
@@ -83,14 +81,12 @@ Knee-On-Belly Running Escape | jju-9-0
 
 # Escapes · 10.0 Armbar | jju-ch10
 Armbar Escape Movement Drill | jju-10-0
-Common Misconceptions | jju-10-1
 Armbar Escape To Guard Pass | jju-10-2
 Armbar Escape To Guard Pass 2 | jju-10-3
 Armbar Escape From Bottom | jju-10-4
 
 # Escapes · 11.0 Triangle | jju-ch11
 Triangle Escape To Pass | jju-11-0
-Common Misconceptions | jju-11-1
 
 # Escapes · 12.0 Guillotine | jju-ch12
 Classic Guillotine Escape | jju-12-0
@@ -124,7 +120,6 @@ Frustrating Standing Base | jju-16-0
 Hip Push Sweep | jju-16-1
 Classic Underhook Sweep | jju-16-2
 Rollout Against Underhook Defense | jju-16-3
-Common Misconceptions | jju-16-4
 
 # Escapes · 17.0 Guard Pass Defense | jju-ch17
 Single Under-The-Leg Pass Defense | jju-17-1
