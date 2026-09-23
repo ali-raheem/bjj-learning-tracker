@@ -17,11 +17,16 @@ npx vitest run tests/bookImport.test.ts          # one file
 npx vitest run -t "preserves user data"          # one test by name
 scripts/deploy.sh    # build and rsync dist/ to https://shoryuken.me/bjj/ (see Deployment)
 npm run book -- books/jju.txt --check   # validate a plain-text Book; drop --check to write .json
+npm run e2e           # Playwright: builds, serves dist/, runs the full browser suite
+npx playwright test tests-e2e/import.spec.ts   # one e2e file
+npm run e2e -- -g "re-importing"               # one e2e test by name
 ```
 
 Tests run in Node against `fake-indexeddb` (see `tests/setup.ts`); each test creates its own
-`AppDatabase` via `freshDb()` in `tests/helpers.ts`. There is no browser test suite; a Playwright
-smoke script was used manually during development.
+`AppDatabase` via `freshDb()` in `tests/helpers.ts`. `npm run e2e` is a separate, slower browser
+suite (`tests-e2e/`, Playwright Test) covering the Svelte UI end to end against a real production
+build; kept out of `npm test` so the fast unit suite stays fast. Each Playwright test gets its own
+browser context, so IndexedDB is isolated per test with no extra fixture work.
 
 If vitest dies with `Bus error (core dumped)`, a native binary in `node_modules` is truncated
 (it happened once after an interrupted install). Fix with `rm -rf node_modules && npm ci`.
@@ -57,6 +62,12 @@ src/lib/import/bookImport.ts   Book file validation, merge-by-externalId import,
 src/lib/import/backup.ts       full backup export, validation, migrate, replace/merge restore
 src/lib/import/textBook.js     plain-text Book format parser (JS with JSDoc: no imports, so the
                                CLI can run it under plain Node); anyBook.ts picks JSON vs text
+tests-e2e/*.spec.ts        Playwright end-to-end suite (npm run e2e); fixtures.ts has in-memory
+                           file-upload helpers and filterSelect() (the filter panel's <select>s
+                           sit in a <label> whose accessible name also picks up every <option>'s
+                           text, e.g. "Drilled" collides with "Drilled or sparred" and "Drilled
+                           first" elsewhere, so getByLabel is unreliable there — scope by the
+                           caption <span> instead)
 books/core-curriculum.txt  built-in starter Book (belt-organised core techniques), bundled via
                            `?raw` and imported by "Load starter curriculum" on the empty screen
 books/jju.txt              the user's JJU transcription in the text format (source of truth
