@@ -37,6 +37,11 @@ Debian 12, behind Cloudflare). `scripts/deploy.sh` builds and rsyncs `dist/` to
 worker; `/bjj/assets/` is immutable. The server has no git checkout; deploys are push-only from
 a local build.
 
+`scripts/deploy.sh` also publishes every `.txt` file under `books/` to
+`https://shoryuken.me/books/<name>.txt`. These are plain downloads (not part of the app or its
+service worker), so a Book file can be opened and saved on a phone, then picked from Import Book
+file. Re-run the script after editing a `books/*.txt` file to update the published copy.
+
 ## Stack and Layout
 
 Svelte 5 (runes) + Vite 7 + TypeScript, Dexie 4 over IndexedDB, `marked` + DOMPurify for notes,
