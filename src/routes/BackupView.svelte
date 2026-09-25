@@ -243,3 +243,8 @@
 <div class="card">
   <button type="button" class="danger" onclick={wipe}>Delete all data on this device</button>
 </div>
+
+<p class="muted small" style="margin-top:24px;text-align:center">
+  Version {__APP_COMMIT__}
+  {#if __APP_COMMIT_DATE__}· committed {new Date(__APP_COMMIT_DATE__).toLocaleString()}{/if}
+</p>

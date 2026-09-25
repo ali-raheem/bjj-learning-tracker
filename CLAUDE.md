@@ -47,6 +47,11 @@ a local build.
 service worker), so a Book file can be opened and saved on a phone, then picked from Import Book
 file. Re-run the script after editing a `books/*.txt` file to update the published copy.
 
+The Backup screen shows a build version (`git rev-parse --short HEAD` + committer date, baked in
+by `vite.config.ts` via `define`). **Commit before building/deploying**, not after — the hash is
+read from the working tree at build time, so building with uncommitted changes stamps the version
+with a `(modified)` suffix instead of the commit that's actually live.
+
 ## Stack and Layout
 
 Svelte 5 (runes) + Vite 7 + TypeScript, Dexie 4 over IndexedDB, `marked` + DOMPurify for notes,

@@ -1,3 +1,4 @@
+import { execSync } from 'node:child_process';
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -6,8 +7,27 @@ import { VitePWA } from 'vite-plugin-pwa';
 // root hosting.
 const base = process.env.VITE_BASE ?? '/bjj/';
 
+// Baked in at build time so the Backup screen can show exactly what is deployed. Falls back
+// gracefully if built outside a git checkout (e.g. from a downloaded archive). A " (modified)"
+// suffix means the working tree had uncommitted changes at build time, i.e. the hash below does
+// not fully describe what was actually deployed — commit before building to avoid that.
+function git(cmd: string): string {
+  try {
+    return execSync(cmd, { encoding: 'utf8' }).trim();
+  } catch {
+    return '';
+  }
+}
+const commitHash = git('git rev-parse --short HEAD') || 'unknown';
+const commitDate = git('git log -1 --format=%cI');
+const dirty = git('git status --porcelain') !== '';
+
 export default defineConfig({
   base,
+  define: {
+    __APP_COMMIT__: JSON.stringify(dirty ? `${commitHash} (modified)` : commitHash),
+    __APP_COMMIT_DATE__: JSON.stringify(commitDate),
+  },
   plugins: [
     svelte(),
     VitePWA({
