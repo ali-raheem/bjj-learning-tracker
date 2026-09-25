@@ -13,6 +13,7 @@
   import { importBook, type BookFile, type BookImportSummary } from '../lib/import/bookImport';
   import { ImportError } from '../lib/import/validation';
   import { data } from '../lib/ui/data.svelte';
+  import { persistentStorage } from '../lib/ui/storage.svelte';
   import {
     confirmAction,
     errorMessage,
@@ -146,6 +147,18 @@
     Last backup: {formatRelativeDays(prefs.backupAgeDays())}
     {#if prefs.backupDue()}— it's a good time to make one{/if}
   </p>
+  {#if persistentStorage.supported}
+    <p
+      class="small"
+      class:error={persistentStorage.persisted === false}
+      class:muted={persistentStorage.persisted !== false}
+    >
+      Storage: {persistentStorage.persisted ? 'persistent' : 'not persistent'}
+      {#if persistentStorage.persisted === false}
+        — the browser may clear app data under storage pressure; back up regularly
+      {/if}
+    </p>
+  {/if}
   <button type="button" class="primary" onclick={doExport}>Export backup</button>
   {#if exportOutcome}<p class="success small">{exportOutcome}</p>{/if}
 </div>
