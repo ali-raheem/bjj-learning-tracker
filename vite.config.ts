@@ -42,6 +42,9 @@ export default defineConfig({
         display: 'standalone',
         start_url: base,
         scope: base,
+        // Fixes the installed app's identity independent of start_url, so changing start_url
+        // later (e.g. moving off /bjj/) updates existing installs instead of duplicating them.
+        id: base,
         icons: [
           { src: 'icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
           { src: 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
