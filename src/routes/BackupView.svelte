@@ -13,6 +13,7 @@
   import { importBook, type BookFile, type BookImportSummary } from '../lib/import/bookImport';
   import { ImportError } from '../lib/import/validation';
   import { data } from '../lib/ui/data.svelte';
+  import { installPrompt } from '../lib/ui/install.svelte';
   import { persistentStorage } from '../lib/ui/storage.svelte';
   import {
     confirmAction,
@@ -243,6 +244,14 @@
 <div class="card">
   <button type="button" class="danger" onclick={wipe}>Delete all data on this device</button>
 </div>
+
+{#if installPrompt.available}
+  <div style="margin-top:24px;text-align:center">
+    <button type="button" class="primary" onclick={() => installPrompt.install()}
+      >Install app</button
+    >
+  </div>
+{/if}
 
 <p class="muted small" style="margin-top:24px;text-align:center">
   Version {__APP_COMMIT__}
