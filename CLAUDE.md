@@ -89,8 +89,9 @@ in the UI. Links are embedded as an array on the Technique record rather than a 
 **Gotcha:** values from `data.*` or any `$state` are proxies. Pass `$state.snapshot(x)` before
 handing an object to Dexie, or IndexedDB will throw `DataCloneError`.
 
-Note: the parent directory `../CLAUDE.md` belongs to an unrelated Rust project (a Fallout save
-editor). Ignore its commands and architecture here.
+Note: `../CLAUDE.md` describes the shoryuken.me workspace and its shared-origin rules. The one
+above it, `~/Workspace/CLAUDE.md`, belongs to an unrelated Rust project (a Fallout save editor);
+ignore its commands and architecture here.
 
 ## What the App Is
 
