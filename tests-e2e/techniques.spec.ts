@@ -79,6 +79,8 @@ test.describe('manual creation and inline progress', () => {
     const newTechInput = page.getByLabel('New technique name in Ch');
     await newTechInput.fill('Persisted Technique');
     await newTechInput.press('Enter');
+    // Wait for the save to land before navigating away, or a slow runner can lose the race.
+    await expect(page.getByText('Persisted Technique')).toBeVisible();
 
     await page.goto('/#/');
     const row = page.locator('.tech-row', { hasText: 'Persisted Technique' });
