@@ -1,5 +1,14 @@
 # BJJ Learning Tracker
 
+[![CI](https://github.com/ali-raheem/bjj-learning-tracker/actions/workflows/ci.yml/badge.svg)](https://github.com/ali-raheem/bjj-learning-tracker/actions/workflows/ci.yml) [![GitHub Pages](https://github.com/ali-raheem/bjj-learning-tracker/actions/workflows/pages.yml/badge.svg)](https://github.com/ali-raheem/bjj-learning-tracker/actions/workflows/pages.yml)
+
+**▶ Try it live: [shoryuken.me/bjj](https://shoryuken.me/bjj/)** · mirror on [GitHub Pages](https://ali-raheem.github.io/bjj-learning-tracker/) · installable, works offline
+
+<p align="center">
+  <a href="https://shoryuken.me/bjj/"><img src="docs/screenshots/desktop.webp" alt="BJJ Learning Tracker on a desktop browser" width="74%"></a>
+  <a href="https://shoryuken.me/bjj/"><img src="docs/screenshots/mobile.webp" alt="BJJ Learning Tracker on a phone" width="22%"></a>
+</p>
+
 A local-first, offline-capable web app for tracking Brazilian Jiu-Jitsu techniques: what you
 have **read**, what you have **drilled**, and how many times you have **used it in sparring**
 (up to three). Designed for phones, installable as a PWA, no accounts or server.
