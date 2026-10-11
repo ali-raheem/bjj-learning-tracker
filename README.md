@@ -51,3 +51,7 @@ the same file updates names and structure while keeping your progress, notes and
 dropped by the source are kept as "orphaned" if you had recorded anything against them.
 
 The full specification is in `Proposal.md`.
+
+## Licence
+
+[MIT](LICENSE) © 2026 Ali Raheem.
