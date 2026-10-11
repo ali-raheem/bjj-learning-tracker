@@ -85,6 +85,11 @@ test.describe('manual creation and inline progress', () => {
     await page.goto('/#/');
     const row = page.locator('.tech-row', { hasText: 'Persisted Technique' });
     await row.getByRole('button', { name: /^Read/ }).click();
+    // aria-pressed comes from the database (liveQuery), so this confirms the write landed.
+    await expect(row.getByRole('button', { name: /^Read/ })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
 
     await page.reload();
     await expect(
